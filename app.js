@@ -15,39 +15,41 @@ Header.propTypes = {
   title: React.PropTypes.string.isRequired
 }
 
+function Player(props) {
+  return (
+    <div className="player">
+      <div className="player-name">
+        {props.name}
+      </div>
+      <div className="player-score">
+      </div>
+      <div className="counter">
+        <button className="counter-action decrement"> - </button>
+        <div className="counter-score"> {props.score} </div>
+        <button className="counter-action increment"> + </button>
+      </div>
+    </div>
+  )
+}
+
+Player.PropTypes = {
+  name: React.PropTypes.string.isRequired,
+  score: React.PropTypes.number.isRequired
+}
+
+function Counter(props) {
+  return (
+
+  )
+}
+
 function Application(props){
   return (
     <div className="scoreboard">
-    <Header title={props.title} />
+      <Header title={props.title} />
       <div className="players">
-
-        <div className="player">
-          <div className="player-name">
-            Jenna
-          </div>
-          <div className="player-score">
-          </div>
-          <div className="counter">
-            <button className="counter-action decrement"> - </button>
-            <div className="counter-score"> 30 </div>
-            <button className="counter-action increment"> + </button>
-          </div>
-        </div>
-
-        <div className="player">
-          <div className="player-name">
-            Calum
-          </div>
-          <div className="player-score">
-          </div>
-          <div className="counter">
-            <button className="counter-action decrement"> - </button>
-            <div className="counter-score"> 24 </div>
-            <button className="counter-action increment"> + </button>
-          </div>
-        </div>
-
-
+        <Player name:"Jenna" score:{31} />
+        <Player name:"Calum" score:{24} />
       </div>
     </div>
   );
