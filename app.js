@@ -2,12 +2,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-function Application(props){
+
+function Header(props){
   return (
-    <div className="scoreboard">
     <div className="header">
       <h1> { props.title } </h1>
     </div>
+  )
+}
+
+function Application(props){
+  return (
+    <div className="scoreboard">
+    <Header title={props.title} />
       <div className="players">
 
         <div className="player">
