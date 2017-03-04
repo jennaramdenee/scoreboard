@@ -2,6 +2,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+var PLAYERS = [
+  {
+    name: "Jenna",
+    score: 33,
+  },
+  {
+    name: "Calum",
+    score: 24,
+  },
+  {
+    name: "Amber",
+    score: 46,
+  }
+]
 
 function Header(props){
   return (
@@ -60,7 +74,11 @@ function Application(props){
 }
 
 Application.propTypes = {
-  title: React.PropTypes.string
+  title: React.PropTypes.string,
+  players: React.PropTypes.arrayOf(React.PropTypes.shape({
+    name: React.PropTypes.string.isRequired,
+    score: React.PropTypes.number.isRequired,
+  })).isRequired
 }
 
 Application.defaultTypes = {
@@ -68,4 +86,4 @@ Application.defaultTypes = {
 }
 
 
-ReactDOM.render(<Application title="Scoreboard"/>, document.getElementById("container"))
+ReactDOM.render(<Application title="Scoreboard" players={PLAYERS}/>, document.getElementById("container"))
