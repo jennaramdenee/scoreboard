@@ -11,6 +11,10 @@ function Header(props){
   )
 }
 
+Header.propTypes = {
+  title: React.PropTypes.string.isRequired
+}
+
 function Application(props){
   return (
     <div className="scoreboard">
