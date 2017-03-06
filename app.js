@@ -20,6 +20,8 @@ var PLAYERS = [
   }
 ]
 
+var nextId = 4
+
 function Header(props){
   return (
     <div className="header">
@@ -95,6 +97,41 @@ Stats.propTypes = {
 
 }
 
+//forms
+var AddPlayerForm = React.createClass({
+  propTypes: {
+    onAdd: React.PropTypes.func.isRequired
+  },
+
+  onSubmit: function(event){
+    event.preventDefault()
+    this.props.onAdd(this.state.name)
+    this.setState({name: ""})
+  },
+
+  getInitialState: function(){
+    return {
+      name: ""
+    }
+  },
+
+  onNameChange: function(e){
+    this.setState({name: e.target.value})
+  },
+
+  render: function(){
+    return (
+      <div className="add-player-form">
+        <form onSubmit={this.onSubmit}>
+          <input type="text" value={this.state.name} onChange={this.onNameChange}/>
+          <input type="submit" value="Add Player"/>
+        </form>
+      </div>
+    )
+  }
+})
+
+
 var Application = React.createClass({
   propTypes: {
     title: React.PropTypes.string,
@@ -122,21 +159,32 @@ var Application = React.createClass({
     this.setState(this.state)
   },
 
+  onPlayerAdd: function(name){
+    this.state.players.push({
+      name: name,
+      score: 0,
+      id: nextId,
+    })
+    this.setState(this.state)
+    nextId += 1
+  },
+
   render: function(){
     return (
       <div className="scoreboard">
-      <Header title={this.props.title} players={this.state.players} />
-      <div className="players">
-        {this.state.players.map(function(player, index){
-          return (
-            <Player
-              onScoreChange= {function(delta) {this.onScoreChange(index, delta)}.bind(this)}
-              name={player.name}
-              score={player.score}
-              key={player.id} />
-          )
-        }.bind(this))}
-      </div>
+        <Header title={this.props.title} players={this.state.players} />
+        <div className="players">
+          {this.state.players.map(function(player, index){
+            return (
+              <Player
+                onScoreChange= {function(delta) {this.onScoreChange(index, delta)}.bind(this)}
+                name={player.name}
+                score={player.score}
+                key={player.id} />
+            )
+          }.bind(this))}
+        </div>
+        <AddPlayerForm onAdd={this.onPlayerAdd} />
       </div>
     );
   }
